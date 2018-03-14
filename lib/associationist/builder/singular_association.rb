@@ -2,7 +2,7 @@ module Associationist
   module Builder
     class SingularAssociation < ::ActiveRecord::Associations::Builder::SingularAssociation
       def self.valid_options(options)
-        super + [:foreign_type, :dependent, :primary_key, :inverse_of, :required, :associationist]
+        super + [:associationist]
       end
 
       def self.define_accessors(model, reflection)

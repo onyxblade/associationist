@@ -17,6 +17,11 @@ module Associationist
         Object
       end
 
+      def force_reload_reader
+        reload
+        target
+      end
+
     end
   end
 end

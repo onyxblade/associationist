@@ -6,7 +6,7 @@ module Associationist
       end
 
       def self.valid_options(options)
-        super + [:primary_key, :dependent, :as, :through, :source, :source_type, :inverse_of, :counter_cache, :join_table, :foreign_type, :index_errors, :associationist]
+        super + [:associationist]
       end
 
       def self.valid_dependent_options
