@@ -13,6 +13,10 @@ module Associationist
         !loaded? && !owner.new_record?
       end
 
+      def klass
+        Object
+      end
+
     end
   end
 end
