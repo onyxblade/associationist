@@ -1,5 +1,5 @@
 require 'active_record'
-require_relative '../lib/association_builder'
+require_relative '../lib/associationist'
 require 'database_cleaner'
 require 'minitest'
 require 'minitest/autorun'
@@ -13,7 +13,7 @@ end
 
 DatabaseCleaner.strategy = :truncation
 
-module AssociationBuilder
+module Associationist
   class Test < ::Minitest::Test
     include Fixtures
 

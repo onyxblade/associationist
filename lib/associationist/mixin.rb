@@ -1,4 +1,4 @@
-module AssociationBuilder
+module Associationist
   class Mixin < Module
     def initialize raw_config
       @raw_config = raw_config
@@ -6,14 +6,14 @@ module AssociationBuilder
 
     def included base
       config = Config.new @raw_config
-      reflection_options = {association_builder: config}
+      reflection_options = {associationist: config}
 
       reflection = Builder::SingularAssociation.build(base, config.name, nil, reflection_options)
       ::ActiveRecord::Reflection.add_reflection base, config.name, reflection
     end
 
     def inspect
-      "#<AssociationBuilder::Mixin @name=#{@raw_config[:name].inspect}>"
+      "#<Associationist::Mixin @name=#{@raw_config[:name].inspect}>"
     end
   end
 end

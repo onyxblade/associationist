@@ -4,7 +4,7 @@ ActiveRecord::Base.connection.create_table(:products, force: true) do |t|
 end
 
 class Product < ActiveRecord::Base
-  include AssociationBuilder::Mixin.new(
+  include Associationist::Mixin.new(
     type: :singular,
     name: :stock
   )

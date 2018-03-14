@@ -1,11 +1,11 @@
-require_relative './lib/association_builder/version'
+require_relative './lib/associationist/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'association_builder'
-  spec.version       = AssociationBuilder::VERSION
+  spec.name          = 'associationist'
+  spec.version       = Associationist::VERSION
   spec.authors       = ['CicholGricenchos']
   spec.email         = ['cichol@live.cn']
-  spec.homepage      = 'https://github.com/CicholGricenchos/association_builder'
+  spec.homepage      = 'https://github.com/CicholGricenchos/associationist'
   spec.summary       = ''
   spec.description   = ''
   spec.license       = 'MIT'

@@ -1,4 +1,4 @@
-module AssociationBuilder
+module Associationist
   module Associations
     class SingularAssociation < ::ActiveRecord::Associations::SingularAssociation
       def scope

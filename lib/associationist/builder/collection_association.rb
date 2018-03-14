@@ -1,4 +1,4 @@
-module AssociationBuilder
+module Associationist
   module Builder
     class CollectionAssociation < ::ActiveRecord::Associations::Builder::CollectionAssociation
       def self.macro
@@ -6,7 +6,7 @@ module AssociationBuilder
       end
 
       def self.valid_options(options)
-        super + [:primary_key, :dependent, :as, :through, :source, :source_type, :inverse_of, :counter_cache, :join_table, :foreign_type, :index_errors, :association_builder]
+        super + [:primary_key, :dependent, :as, :through, :source, :source_type, :inverse_of, :counter_cache, :join_table, :foreign_type, :index_errors, :associationist]
       end
 
       def self.valid_dependent_options

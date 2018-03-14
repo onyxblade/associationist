@@ -1,10 +1,10 @@
 require_relative './test_helper'
 
-class TestSingularAssociation < AssociationBuilder::Test
+class TestSingularAssociation < Associationist::Test
 
   class ProductWithLoader < ActiveRecord::Base
     self.table_name = 'products'
-    include AssociationBuilder::Mixin.new(
+    include Associationist::Mixin.new(
       type: :singular,
       name: :stock,
       loader: -> record {
@@ -15,7 +15,7 @@ class TestSingularAssociation < AssociationBuilder::Test
 
   class ProductWithPreloader < ActiveRecord::Base
     self.table_name = 'products'
-    include AssociationBuilder::Mixin.new(
+    include Associationist::Mixin.new(
       type: :singular,
       name: :stock,
       preloader: -> records {

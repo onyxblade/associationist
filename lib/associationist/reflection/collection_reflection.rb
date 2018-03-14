@@ -1,4 +1,4 @@
-module AssociationBuilder
+module Associationist
   module Reflection
     class CollectionReflection < ::ActiveRecord::Reflection::HasManyReflection
       def association_class
@@ -10,7 +10,7 @@ module AssociationBuilder
       end
 
       def config
-        options[:association_builder]
+        options[:associationist]
       end
     end
   end

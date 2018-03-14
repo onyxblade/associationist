@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    association_builder (0.0.1)
+    associationist (0.0.1)
       activerecord (>= 5.0, < 6.0)
 
 GEM
@@ -39,7 +39,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  association_builder!
+  associationist!
   database_cleaner
   pry
   rake

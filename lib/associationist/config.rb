@@ -1,4 +1,4 @@
-module AssociationBuilder
+module Associationist
   class Config
     def initialize config
       @config = config
