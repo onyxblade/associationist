@@ -6,7 +6,7 @@ module Associationist
       end
 
       def find_target
-        reflection.config.loader_proc.call(self)
+        reflection.config.loader_proc.call(owner)
       end
 
       def find_target?

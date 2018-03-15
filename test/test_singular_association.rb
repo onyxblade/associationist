@@ -10,6 +10,7 @@ class TestSingularAssociation < Associationist::Test
       type: :singular,
       name: :stock,
       loader: -> record {
+        #assert_instance_of ProductWithLoader, record
         value
       }
     )
@@ -23,6 +24,7 @@ class TestSingularAssociation < Associationist::Test
       type: :singular,
       name: :stock,
       preloader: -> records {
+        #records.map{|x| assert_instance_of ProductWithPreloader, record}
         records.map{|x| [x, value]}.to_h
       }
     )
