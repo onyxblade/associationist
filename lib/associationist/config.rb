@@ -21,5 +21,9 @@ module Associationist
     def preloader_proc
       @config[:preloader]
     end
+
+    def type
+      @config[:type]
+    end
   end
 end

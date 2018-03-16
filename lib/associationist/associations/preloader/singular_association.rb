@@ -14,8 +14,11 @@ module Associationist
   module ActiveRecordPreloaderPatch
     def preloader_for(reflection, owners, rhs_klass)
       config = reflection.options[:associationist]
-      if config
+      case config.type
+      when :singular
         Associationist::Associations::Preloader::SingularAssociation
+      when :collection
+        Associationist::Associations::Preloader::CollectionAssociation
       else
         super
       end
