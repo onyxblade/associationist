@@ -52,6 +52,21 @@ class TestSingularAssociation < Associationist::Test
     ProductWithPreloader.create
 
     ProductWithPreloader.includes(:stock).all.each do |product|
+      assert product.association(:stock).loaded?
+      assert_equal 2, product.stock
+    end
+  end
+
+  def test_associationist_preload
+    ProductWithPreloader.value = 2
+
+    ProductWithPreloader.create
+    ProductWithPreloader.create
+
+    products = ProductWithPreloader.all
+    Associationist.preload(products, :stock)
+    products.each do |product|
+      assert product.association(:stock).loaded?
       assert_equal 2, product.stock
     end
   end
