@@ -11,5 +11,4 @@ module Associationist
     end
   end
 
-  ActiveRecord::Associations::Preloader.prepend ActiveRecordPreloaderPatch
 end
