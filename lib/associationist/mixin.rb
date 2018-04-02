@@ -8,14 +8,7 @@ module Associationist
       config = Config.new @raw_config
       reflection_options = {associationist: config}
 
-      case config.type
-      when :singular
-        reflection = Builder::SingularAssociation.build(base, config.name, nil, reflection_options)
-      when :collection
-        reflection = Builder::CollectionAssociation.build(base, config.name, nil, reflection_options)
-      else
-        raise "unknown type #{config.type.inspect}"
-      end
+      reflection = Builder::SingularAssociation.build(base, config.name, nil, reflection_options)
       ::ActiveRecord::Reflection.add_reflection base, config.name, reflection
     end
 
