@@ -89,4 +89,18 @@ class TestSingularAssociation < Associationist::Test
     ProductWithPreloader.value = 4
     assert_equal 4, product.reload_stock
   end
+
+  def test_construct_methods
+    product = ProductWithLoader.create
+    refute product.respond_to? :build_stock
+    refute product.respond_to? :create_stock
+    refute product.respond_to? :create_stock!
+  end
+
+  def test_disable_autosave
+    product = ProductWithLoader.create
+    # trigger association_cache and then save
+    product.stock
+    assert product.save
+  end
 end

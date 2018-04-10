@@ -9,6 +9,10 @@ module Associationist
 
       end
 
+      def constructable?
+        false
+      end
+
       def config
         options[:associationist]
       end

@@ -10,8 +10,6 @@ module Associationist
         mixin = model.generated_association_methods
         name = reflection.name
 
-        define_constructors(mixin, name) if reflection.constructable?
-
         mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
           def reload_#{name}
             association(:#{name}).force_reload_reader
@@ -19,11 +17,14 @@ module Associationist
         CODE
       end
 
+      def self.define_callbacks(model, reflection)
+        # bypass dependent callback and autosave callback
+      end
+
       def self.create_reflection(model, name, scope, options, extension = nil)
         raise ArgumentError, "association names must be a Symbol" unless name.kind_of?(Symbol)
 
         validate_options(options)
-
         scope = build_scope(scope, extension)
         Reflection::SingularReflection.new(name, scope, options, model)
       end
