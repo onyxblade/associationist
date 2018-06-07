@@ -25,5 +25,13 @@ module Associationist
     def type
       @config[:type]
     end
+
+    def scope_proc
+      @config[:scope]
+    end
+
+    def eager_loader_proc
+      @config[:eager_loader]
+    end
   end
 end
