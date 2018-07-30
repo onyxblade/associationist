@@ -11,6 +11,9 @@ class TestScopeAssociation < Associationist::Test
       name: :product,
       scope: -> (owner) {
         Product.where(catalog_id: owner.id)
+      },
+      preloader: -> (owners) {
+        owners.map{|x| [x, [1, 2, 3]]}.to_h
       }
     )
   end
@@ -24,6 +27,9 @@ class TestScopeAssociation < Associationist::Test
       name: :products,
       scope: -> (owner) {
         Product.where(catalog_id: owner.id)
+      },
+      preloader: -> (owners) {
+        owners.map{|x| [x, [1, 2, 3]]}.to_h
       }
     )
   end
@@ -42,5 +48,19 @@ class TestScopeAssociation < Associationist::Test
     products = create_products_for_catalog catalog
 
     assert_equal products, catalog.products.to_a
+  end
+
+  def test_singular_preload
+    catalog_a = CatalogWithCollectionScope.create
+    catalog_b = CatalogWithCollectionScope.create
+
+    p CatalogWithCollectionScope.preload(:products).map{|x| x.products}
+  end
+
+  def test_collection_preload
+    catalog_a = CatalogWithSingularScope.create
+    catalog_b = CatalogWithSingularScope.create
+
+    p CatalogWithSingularScope.preload(:product).map{|x| x.product}
   end
 end

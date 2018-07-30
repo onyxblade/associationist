@@ -33,5 +33,10 @@ module Associationist
     def eager_loader_proc
       @config[:eager_loader]
     end
+
+    def options
+      @config[:options]
+    end
+
   end
 end
