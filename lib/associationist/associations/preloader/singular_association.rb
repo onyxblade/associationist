@@ -18,12 +18,24 @@ module Associationist
   end
 
   module ActiveRecordPreloaderPatch
-    def preloader_for(reflection, owners, rhs_klass)
-      config = reflection.options[:associationist]
-      if config
-        Associationist::Associations::Preloader::SingularAssociation
-      else
-        super
+    case
+    when ActiveRecord.version < Gem::Version.new('5.2.0')
+      def preloader_for(reflection, owners, rhs_klass)
+        config = reflection.options[:associationist]
+        if config
+          Associationist::Associations::Preloader::SingularAssociation
+        else
+          super
+        end
+      end
+    when ActiveRecord.version >= Gem::Version.new('5.2.0')
+      def preloader_for(reflection, owners)
+        config = reflection.options[:associationist]
+        if config
+          Associationist::Associations::Preloader::SingularAssociation
+        else
+          super
+        end
       end
     end
   end
