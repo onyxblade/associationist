@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    associationist (0.0.2)
+    associationist (0.1)
       activerecord (>= 5.0, < 6)
 
 GEM

@@ -1,6 +1,6 @@
 module Associationist
   module Associations
-    class CollectionAssociation < ::ActiveRecord::Associations::CollectionAssociation
+    class CollectionAssociation < ::ActiveRecord::Associations::HasManyAssociation
       def association_scope
         reflection.config.scope_proc.call(owner)
       end

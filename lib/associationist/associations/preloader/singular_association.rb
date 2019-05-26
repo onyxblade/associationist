@@ -8,8 +8,26 @@ module Associationist
         end
 
         def run preloader
-          @reflection.config.preloader_proc.call(@owners).map do |record, value|
-            record.association(@reflection.name).target = value
+          case
+          when @reflection.config.preloader_proc
+            @reflection.config.preloader_proc.call(@owners).each do |record, value|
+              record.association(@reflection.name).target = value
+            end
+          when @reflection.config.loader_proc
+            @owners.each do |record|
+              record.association(@reflection.name).target = @reflection.config.loader_proc.call(record)
+            end
+          when @reflection.config.scope_proc
+            case @reflection.config.type
+            when :singular
+              @owners.each do |record|
+                record.association(@reflection.name).target = @reflection.config.scope_proc.call(record).first
+              end
+            when :collection
+              @owners.each do |record|
+                record.association(@reflection.name).target = @reflection.config.scope_proc.call(record)
+              end
+            end
           end
         end
       end
