@@ -23,15 +23,21 @@ module Associationist
     end
 
     def type
-      @config[:type]
+      @config[:type] || :singular
     end
 
     def scope_proc
       @config[:scope]
     end
 
-    def eager_loader_proc
-      @config[:eager_loader]
+    def check
+      if @config[:loader] && @config[:scope]
+        raise "cannot define both loader and scope"
+      end
+
+      if @config[:type] && !@config[:scope]
+        raise "type option only effects when scope defined"
+      end
     end
   end
 end

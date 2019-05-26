@@ -6,6 +6,8 @@ module Associationist
 
     def included base
       config = Config.new @raw_config
+      config.check
+
       reflection_options = {associationist: config}
 
       case config.type

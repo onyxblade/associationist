@@ -7,7 +7,6 @@ class TestSingularAssociation < Associationist::Test
     self.table_name = 'products'
 
     include Associationist::Mixin.new(
-      type: :singular,
       name: :stock,
       loader: -> record {
         #assert_instance_of ProductWithLoader, record
@@ -21,7 +20,6 @@ class TestSingularAssociation < Associationist::Test
     self.table_name = 'products'
 
     include Associationist::Mixin.new(
-      type: :singular,
       name: :stock,
       preloader: -> records {
         #records.map{|x| assert_instance_of ProductWithPreloader, record}

@@ -7,7 +7,6 @@ class TestAssociationist < Associationist::Test
     self.table_name = 'products'
 
     include Associationist::Mixin.new(
-      type: :singular,
       name: :stock,
       preloader: -> records {
         records.map{|x| [x, 1]}.to_h
