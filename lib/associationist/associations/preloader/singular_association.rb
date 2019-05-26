@@ -1,11 +1,17 @@
 module Associationist
   module Associations
     module Preloader
-      class SingularAssociation < ActiveRecord::Associations::Preloader::SingularAssociation
-        def associated_records_by_owner preloader
-          reflection.config.preloader_proc.call(owners).map{|k, v| [k, [v]]}
+      class SingularAssociation
+        def initialize klass, owners, reflection, preload_scope
+          @owners = owners
+          @reflection = reflection
         end
 
+        def run preloader
+          @reflection.config.preloader_proc.call(@owners).map do |record, value|
+            record.association(@reflection.name).target = value
+          end
+        end
       end
 
     end
