@@ -44,6 +44,26 @@ class TestScopeAssociation < Associationist::Test
     )
   end
 
+  class CatalogWithArbitraryScope < ActiveRecord::Base
+    self.table_name = 'catalogs'
+
+    include Associationist::Mixin.new(
+      type: :collection,
+      name: :products,
+      scope: -> (owner) {
+        Product.all
+      }
+    )
+
+    include Associationist::Mixin.new(
+      type: :singular,
+      name: :product,
+      scope: -> (owner) {
+        Product.all
+      }
+    )
+  end
+
   def create_products_for_catalog catalog
     3.times.map{ Product.create(catalog_id: catalog.id) }
   end
@@ -73,7 +93,11 @@ class TestScopeAssociation < Associationist::Test
   end
 
   def test_limit
+    catalog = CatalogWithCollectionScope.create
+    products = create_products_for_catalog catalog
 
+    assert_equal 2, catalog.products.limit(2).size
+    assert_equal products.first(2), catalog.products.limit(2).to_a
   end
 
   def test_count
@@ -89,5 +113,15 @@ class TestScopeAssociation < Associationist::Test
     products = catalogs.map{|catalog| (create_products_for_catalog catalog).first}
 
     assert [1, 1, 1], CatalogWithSingularScope.all.includes(:product).map(&:product)
+  end
+
+  def test_loading_scope_before_save
+    products = 3.times.map{ Product.create }
+    catalog = CatalogWithArbitraryScope.new
+
+    assert_equal 3, catalog.products.size
+    assert_equal products, catalog.products.to_a
+
+    assert_equal products.first, catalog.product
   end
 end

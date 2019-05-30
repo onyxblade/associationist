@@ -18,7 +18,7 @@ module Associationist
       end
 
       def find_target?
-        !loaded? && !owner.new_record?
+        !loaded?
       end
 
       def klass

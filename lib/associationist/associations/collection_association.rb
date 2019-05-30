@@ -5,6 +5,14 @@ module Associationist
         reflection.config.scope_proc.call(owner)
       end
 
+      def find_target?
+        !loaded?
+      end
+
+      def null_scope?
+        false
+      end
+
       case
       when ActiveRecord.version < Gem::Version.new('5.2.0')
         def skip_statement_cache?
