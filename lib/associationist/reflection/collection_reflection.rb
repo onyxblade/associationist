@@ -9,6 +9,10 @@ module Associationist
 
       end
 
+      def has_cached_counter?
+        false
+      end
+
       def config
         options[:associationist]
       end

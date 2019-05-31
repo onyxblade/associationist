@@ -13,6 +13,10 @@ module Associationist
         false
       end
 
+      def klass
+        association_scope.klass
+      end
+
       case
       when ActiveRecord.version < Gem::Version.new('5.2.0')
         def skip_statement_cache?

@@ -62,6 +62,24 @@ class TestScopeAssociation < Associationist::Test
         Product.all
       }
     )
+
+    include Associationist::Mixin.new(
+      type: :collection,
+      name: :some_products,
+      class_name: 'Product',
+      scope: -> (owner) {
+        Product.all
+      }
+    )
+
+    include Associationist::Mixin.new(
+      type: :singular,
+      name: :some_product,
+      class_name: 'Product',
+      scope: -> (owner) {
+        Product.all
+      }
+    )
   end
 
   def create_products_for_catalog catalog
@@ -123,5 +141,15 @@ class TestScopeAssociation < Associationist::Test
     assert_equal products, catalog.products.to_a
 
     assert_equal products.first, catalog.product
+  end
+
+  def test_determine_classname
+    products = 3.times.map{ Product.create }
+    catalog = CatalogWithArbitraryScope.new
+
+    assert_equal 3, catalog.some_products.size
+    assert_equal products, catalog.some_products.to_a
+
+    assert_equal products.first, catalog.some_product
   end
 end

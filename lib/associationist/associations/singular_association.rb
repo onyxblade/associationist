@@ -23,7 +23,7 @@ module Associationist
 
       def klass
         if reflection.config.scope_proc
-          super
+          association_scope.klass
         else
           Object
         end
