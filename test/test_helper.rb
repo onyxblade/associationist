@@ -3,7 +3,6 @@ require_relative '../lib/associationist'
 require 'database_cleaner'
 require 'minitest'
 require 'minitest/autorun'
-require_relative './fixtures'
 require 'pry'
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
@@ -16,8 +15,6 @@ DatabaseCleaner.strategy = :truncation
 
 module Associationist
   class Test < ::Minitest::Test
-    include Fixtures
-
     def teardown
       DatabaseCleaner.clean
       SQLCounter.clear_log

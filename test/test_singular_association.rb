@@ -28,6 +28,32 @@ class TestSingularAssociation < Associationist::Test
     )
   end
 
+  class CatalogWithPreloader < ActiveRecord::Base
+    self.table_name = 'catalogs'
+    include Associationist::Mixin.new(
+      name: :product,
+      preloader: -> records {
+        product = Product.last
+        records.map{|x| [x, product] }.to_h
+      }
+    )
+  end
+
+  def test_preload_multilevel_for_singular_association
+    product = Product.create
+    properties = 3.times.map{ product.properties.create }
+
+    catalogs = 3.times.map{ CatalogWithPreloader.create }
+    loaded_catalogs = assert_queries 3 do
+      CatalogWithPreloader.where(id: catalogs.map(&:id)).includes(product: :properties).all.to_a
+    end
+
+    assert_no_queries do
+      assert_equal product, loaded_catalogs.first.product
+      assert_equal properties, loaded_catalogs.first.product.properties
+    end
+  end
+
   def test_load
     ProductWithLoader.value = 1
     ProductWithPreloader.value = 2

@@ -2,11 +2,11 @@ module Associationist
   module Associations
     class SingularAssociation < ::ActiveRecord::Associations::SingularAssociation
       def association_scope
-        if reflection.config.scope_proc
-          reflection.config.scope_proc.call(owner)
-        else
-          raise NotImplementedError
-        end
+        @_association_scope ||= if reflection.config.scope_proc
+                                  reflection.config.scope_proc.call(owner)
+                                else
+                                  raise NotImplementedError
+                                end
       end
 
       def find_target

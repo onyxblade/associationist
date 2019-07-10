@@ -2,7 +2,7 @@ module Associationist
   module Associations
     class CollectionAssociation < ::ActiveRecord::Associations::HasManyAssociation
       def association_scope
-        reflection.config.scope_proc.call(owner)
+        @_association_scope ||= reflection.config.scope_proc.call(owner)
       end
 
       def find_target?
