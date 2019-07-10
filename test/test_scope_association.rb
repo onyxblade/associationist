@@ -102,12 +102,20 @@ class TestScopeAssociation < Associationist::Test
     catalogs = 3.times.map{CatalogWithSingularScope.create}
     products = catalogs.map{|catalog| (create_products_for_catalog catalog).first}
 
-    assert products, CatalogWithSingularScope.all.includes(:product).map(&:product)
+    assert_equal products, CatalogWithSingularScope.where(id: catalogs).includes(:product).map(&:product)
 
     catalogs = 3.times.map{CatalogWithCollectionScope.create}
     products = catalogs.map{|catalog| create_products_for_catalog catalog}
 
-    assert products, CatalogWithCollectionScope.all.includes(:products).map(&:products)
+    assert_equal products, CatalogWithCollectionScope.where(id: catalogs).includes(:products).map(&:products)
+
+    catalogs = 3.times.map{CatalogWithCollectionScope.create}
+    products = catalogs.map{|catalog| create_products_for_catalog catalog}
+    properties = products.first.map do |product|
+      product.properties.create
+    end
+    assert_equal products, CatalogWithCollectionScope.where(id: catalogs).includes(products: :properties).map(&:products)
+    assert_equal properties, CatalogWithCollectionScope.where(id: catalogs).includes(products: :properties).map(&:products).first.map(&:properties).inject(:+)
   end
 
   def test_limit

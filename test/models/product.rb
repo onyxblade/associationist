@@ -5,4 +5,5 @@ ActiveRecord::Base.connection.create_table(:products, force: true) do |t|
 end
 
 class Product < ActiveRecord::Base
+  has_many :properties
 end

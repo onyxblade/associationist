@@ -30,6 +30,10 @@ module Associationist
             end
           end
         end
+
+        def preloaded_records
+          @owners.flat_map { |owner| owner.association(@reflection.name).target }
+        end
       end
 
     end
