@@ -7,7 +7,8 @@ module Associationist
           @reflection = reflection
         end
 
-        def run preloader
+        # handle >= 6.0
+        def run preloader = nil
           case
           when @reflection.config.preloader_proc
             @reflection.config.preloader_proc.call(@owners).each do |record, value|
@@ -29,6 +30,7 @@ module Associationist
               end
             end
           end
+          self
         end
 
         def preloaded_records

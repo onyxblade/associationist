@@ -18,7 +18,12 @@ module Associationist
 
         validate_options(options)
 
-        scope = build_scope(scope, extension)
+        case
+        when ActiveRecord.version >= Gem::Version.new('6.0.0')
+          scope = build_scope(scope)
+        else
+          scope = build_scope(scope, extension)
+        end
         Reflection::CollectionReflection.new(name, scope, options, model)
       end
     end
