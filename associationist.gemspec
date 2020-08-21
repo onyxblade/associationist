@@ -3,9 +3,9 @@ require_relative './lib/associationist/version'
 Gem::Specification.new do |spec|
   spec.name          = 'associationist'
   spec.version       = Associationist::VERSION
-  spec.authors       = ['CicholGricenchos']
+  spec.authors       = ['onyxblade']
   spec.email         = ['cichol@live.cn']
-  spec.homepage      = 'https://github.com/CicholGricenchos/associationist'
+  spec.homepage      = 'https://github.com/onyxblade/associationist'
   spec.summary       = ''
   spec.description   = ''
   spec.license       = 'MIT'

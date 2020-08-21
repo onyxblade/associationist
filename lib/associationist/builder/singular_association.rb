@@ -37,7 +37,7 @@ module Associationist
       def self.define_writers(mixin, name)
         mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
           def #{name}=(value)
-            association(:#{name}).target = value
+            raise "Virtual associations are read-only."
           end
         CODE
       end

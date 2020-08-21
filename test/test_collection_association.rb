@@ -29,7 +29,8 @@ class TestCollectionAssociation < Associationist::Test
 
   def test_write_association
     catalog = Catalog__WithPreloader.create
-    catalog.products = [1]
-    assert_equal [1], catalog.products
+    assert_raises do
+      catalog.products = [1]
+    end
   end
 end

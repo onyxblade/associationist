@@ -142,7 +142,8 @@ class TestSingularAssociation < Associationist::Test
 
   def test_write_association
     product = ProductWithLoader.create
-    product.stock = 1
-    assert_equal 1, product.stock
+    assert_raises do
+      product.stock = 1
+    end
   end
 end
