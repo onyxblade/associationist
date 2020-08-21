@@ -1,6 +1,6 @@
 require_relative './test_helper'
 
-class TestSingularAssociation < Associationist::Test
+class TestCollectionAssociation < Associationist::Test
   class Catalog__WithPreloader < ActiveRecord::Base
     self.table_name = 'catalogs'
     include Associationist::Mixin.new(
@@ -25,5 +25,11 @@ class TestSingularAssociation < Associationist::Test
       assert_equal products, loaded_catalogs.first.products
       assert_equal properties, loaded_catalogs.first.products.map(&:properties).inject(:+)
     end
+  end
+
+  def test_write_association
+    catalog = Catalog__WithPreloader.create
+    catalog.products = [1]
+    assert_equal [1], catalog.products
   end
 end
