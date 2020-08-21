@@ -34,6 +34,14 @@ module Associationist
         Reflection::SingularReflection.new(name, scope, options, model)
       end
 
+      def self.define_writers(mixin, name)
+        mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
+          def #{name}=(value)
+            association(:#{name}).target = value
+          end
+        CODE
+      end
+
     end
   end
 end
