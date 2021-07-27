@@ -2,7 +2,7 @@ module Associationist
   module Associations
     module Preloader
       class SingularAssociation
-        def initialize klass, owners, reflection, preload_scope
+        def initialize klass, owners, reflection, preload_scope, associate_by_default = true
           @owners = owners
           @reflection = reflection
         end
