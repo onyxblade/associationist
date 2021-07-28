@@ -33,4 +33,10 @@ class TestCollectionAssociation < Associationist::Test
       catalog.products = [1]
     end
   end
+
+  def test_eager_load
+    assert_raises do
+      Catalog__WithPreloader.eager_load(:products).all.to_a
+    end
+  end
 end

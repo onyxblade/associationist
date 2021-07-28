@@ -146,4 +146,10 @@ class TestSingularAssociation < Associationist::Test
       product.stock = 1
     end
   end
+
+  def test_eager_load
+    assert_raises do
+      ProductWithLoader.eager_load(:stock).all.to_a
+    end
+  end
 end

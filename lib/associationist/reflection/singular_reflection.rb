@@ -6,7 +6,7 @@ module Associationist
       end
 
       def check_eager_loadable!
-
+        raise "Virtual associations cannot be eager-loaded."
       end
 
       def constructable?
