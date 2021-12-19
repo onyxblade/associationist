@@ -114,6 +114,9 @@ class Product < ApplicationRecord
     preloader: -> products {
       products.map{|product| [product, 100]}.to_h
     },
+    # If your preloaded objects are of an ActiveRecord class, you need to specify class_name for through-preloading.
+    # This is not needed when using the scope option.
+    class_name: 'Stock',
 
     # scope defines the scope returned by association reading.
     scope: -> product {
