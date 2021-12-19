@@ -25,7 +25,11 @@ module Associationist
         if reflection.config.scope_proc
           association_scope.klass
         else
-          Object
+          if reflection.config.class_name
+            reflection.config.class_name.constantize
+          else
+            Object
+          end
         end
       end
 

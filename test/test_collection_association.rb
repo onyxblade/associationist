@@ -5,6 +5,7 @@ class TestCollectionAssociation < Associationist::Test
     self.table_name = 'catalogs'
     include Associationist::Mixin.new(
       name: :products,
+      class_name: 'Product',
       preloader: -> records {
         products = Product.all.to_a
         records.map{|x| [x, products.to_a] }.to_h

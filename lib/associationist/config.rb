@@ -30,6 +30,10 @@ module Associationist
       @config[:scope]
     end
 
+    def class_name
+      @config[:class_name]
+    end
+
     def check
       if @config[:loader] && @config[:scope]
         raise "cannot define both loader and scope"

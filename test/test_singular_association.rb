@@ -32,6 +32,7 @@ class TestSingularAssociation < Associationist::Test
     self.table_name = 'catalogs'
     include Associationist::Mixin.new(
       name: :product,
+      class_name: 'Product',
       preloader: -> records {
         product = Product.last
         records.map{|x| [x, product] }.to_h
