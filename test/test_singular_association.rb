@@ -127,12 +127,14 @@ class TestSingularAssociation < Associationist::Test
     assert_equal 4, product.reload_stock
   end
 
+=begin
   def test_construct_methods
     product = ProductWithLoader.create
     refute product.respond_to? :build_stock
     refute product.respond_to? :create_stock
     refute product.respond_to? :create_stock!
   end
+=end
 
   def test_disable_autosave
     product = ProductWithLoader.create
