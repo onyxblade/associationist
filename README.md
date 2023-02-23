@@ -1,6 +1,6 @@
 # associationist
 
-[![Build Status](https://travis-ci.com/onyxblade/associationist.svg?branch=master)](https://travis-ci.com/onyxblade/associationist)
+![Build Status](https://github.com/onyxblade/associationist/actions/workflows/test.yml/badge.svg?branch=master)
 
 A gem to define virtual associations on Rails models.
 
