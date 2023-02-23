@@ -39,7 +39,7 @@ module Associationist
         end
 
         def preloaded_records
-          @owners.flat_map { |owner| owner.association(@reflection.name).target }
+          @owners.flat_map { |owner| owner.association(@reflection.name).target }.compact
         end
 
         # handle >=7.0

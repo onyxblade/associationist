@@ -6,4 +6,10 @@ end
 
 class Property < ActiveRecord::Base
   belongs_to :product
+
+  include Associationist::Mixin.new(
+    name: :associationist_product,
+    type: :singular,
+    scope: -> property { Product.where(id: property.product_id) }
+  )
 end

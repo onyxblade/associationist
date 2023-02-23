@@ -24,4 +24,14 @@ class TestAssociationist < Associationist::Test
       assert_equal products_using_includes.map(&:stock), products_using_preload.map(&:stock)
     end
   end
+
+  def test_preload_with_nil_middle_records
+    catalog = Catalog.create!(name: 'Book')
+    product = Product.create!(catalog: catalog, name: 'Programming Ruby')
+    property = Property.create!(product: product, name: 'Page Size')
+
+    assert Property.preload(associationist_product: :catalog).load
+    product.destroy
+    assert Property.preload(associationist_product: :catalog).load
+  end
 end

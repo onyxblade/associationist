@@ -5,5 +5,6 @@ ActiveRecord::Base.connection.create_table(:products, force: true) do |t|
 end
 
 class Product < ActiveRecord::Base
+  belongs_to :catalog
   has_many :properties
 end
