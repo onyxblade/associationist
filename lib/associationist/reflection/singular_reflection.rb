@@ -20,6 +20,8 @@ module Associationist
       def config
         options[:associationist]
       end
+
+      alias :check_validity! :check_validity_of_inverse!
     end
   end
 end
