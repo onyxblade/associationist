@@ -20,9 +20,16 @@ jobs:
         with:
           ruby-version: ${{ matrix.envs.ruby }}
           bundler-cache: true
+      - run: bundle exec rake test
       - name: Install Rails dependencies
         run: sudo apt-get install sqlite3 libsqlite3-dev mysql-server libmysqlclient-dev postgresql postgresql-client postgresql-contrib libpq-dev redis-server memcached imagemagick ffmpeg mupdf mupdf-tools libxml2-dev libvips42 poppler-utils -y
       - name: Clone Rails repository
         run: git clone --depth 1 --branch 7-2-stable https://github.com/rails/rails.git
+      - name: Add associationist to Gemfile
+        run: "echo \"gem 'associationist', path: './../associationist'\" >> Gemfile"
+      - name: Require associationist
+        run: "echo \"require 'associationist'\" >> rails/activerecord/test/cases/helper.rb"
       - name: Bundle Rails
         run: cd rails && bundle
+      - name: Run ActiveRecord tests
+        run: bundle exec rake test:sqlite3_mem
