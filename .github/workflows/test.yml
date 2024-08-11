@@ -9,7 +9,7 @@ jobs:
       matrix:
         envs:
           - gemfile: rails7-2
-            ruby: '3.1'
+            ruby: '3.2'
 
     runs-on: ubuntu-latest
     env:
