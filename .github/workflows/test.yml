@@ -24,6 +24,8 @@ jobs:
       - name: Add associationist to Gemfile
         run: "echo \"gem 'associationist', path: './../associationist'\" >> Gemfile"
 
+      - name: Remove Gemfile.lock
+        run: rm rails/Gemfile.lock
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.envs.ruby }}
