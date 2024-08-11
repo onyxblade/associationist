@@ -32,4 +32,4 @@ jobs:
       - name: Bundle Rails
         run: cd rails && bundle
       - name: Run ActiveRecord tests
-        run: cd rails/activerecord && bundle exec rake test:sqlite3_mem
+        run: cd rails/activerecord && bundle exec rake test:sqlite3_mem --trace
