@@ -40,9 +40,9 @@ jobs:
       matrix:
         envs:
           - rails_branch: 7-0-stable
-            ruby: '2.7'
+            ruby: '3.0'
           - rails_branch: 7-1-stable
-            ruby: '2.7'
+            ruby: '3.2'
           - rails_branch: 7-2-stable
             ruby: '3.2'
 
