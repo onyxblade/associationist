@@ -26,6 +26,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.envs.ruby }}
           bundler-cache: true
+          cache-version: 1
       #- run: bundle exec rake test
 
       - name: Require associationist
