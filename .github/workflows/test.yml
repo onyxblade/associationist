@@ -8,18 +8,6 @@ jobs:
       fail-fast: false
       matrix:
         envs:
-          - gemfile: rails5-1
-            ruby: '2.7'
-          - gemfile: rails5-2
-            ruby: '2.7'
-          - gemfile: rails6-0
-            ruby: '2.7'
-          - gemfile: rails6-1
-            ruby: '2.7'
-          - gemfile: rails7-0
-            ruby: '2.7'
-          - gemfile: rails7-1
-            ruby: '2.7'
           - gemfile: rails7-2
             ruby: '3.1'
 
@@ -32,4 +20,9 @@ jobs:
         with:
           ruby-version: ${{ matrix.envs.ruby }}
           bundler-cache: true
-      - run: bundle exec rake test
+      - name: Install Rails dependencies
+        run: sudo apt-get install sqlite3 libsqlite3-dev mysql-server libmysqlclient-dev postgresql postgresql-client postgresql-contrib libpq-dev redis-server memcached imagemagick ffmpeg mupdf mupdf-tools libxml2-dev libvips42 poppler-utils -y
+      - name: Clone Rails repository
+        run: git clone --depth 1 --branch 7-2-stable https://github.com/rails/rails.git
+      - name: Bundle Rails
+        run: cd rails && bundle
