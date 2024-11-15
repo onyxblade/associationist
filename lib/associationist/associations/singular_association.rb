@@ -9,11 +9,21 @@ module Associationist
                                 end
       end
 
-      def find_target
-        if reflection.config.scope_proc
-          super
-        else
-          reflection.config.loader_proc.call(owner)
+      if ActiveRecord.version >= Gem::Version.new('8.0.0')
+        def find_target(async: false)
+          if reflection.config.scope_proc
+            super
+          else
+            reflection.config.loader_proc.call(owner) # TODO: use async load
+          end
+        end
+      else
+        def find_target
+          if reflection.config.scope_proc
+            super
+          else
+            reflection.config.loader_proc.call(owner)
+          end
         end
       end
 

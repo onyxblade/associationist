@@ -22,6 +22,8 @@ jobs:
             ruby: '2.7'
           - gemfile: rails7-2
             ruby: '3.1'
+          - gemfile: rails8-0
+            ruby: '3.2'
 
     runs-on: ubuntu-latest
     env:
@@ -44,6 +46,8 @@ jobs:
           - rails_branch: 7-1-stable
             ruby: '3.2'
           - rails_branch: 7-2-stable
+            ruby: '3.2'
+          - rails_branch: 8-0-stable
             ruby: '3.2'
 
     runs-on: ubuntu-latest
