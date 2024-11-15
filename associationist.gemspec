@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = Dir.glob("lib/**/*.rb")
 
-  spec.add_runtime_dependency 'activerecord', '>= 5.0', '< 7.3'
+  spec.add_runtime_dependency 'activerecord', '>= 5.0', '< 8.1'
 
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'sqlite3'
