@@ -21,6 +21,14 @@ module Associationist
         options[:associationist]
       end
 
+      def klass
+        if config.class_name
+          config.class_name.constantize
+        else
+          ActiveRecord::Base
+        end
+      end
+
       alias :check_validity! :check_validity_of_inverse!
     end
   end
